@@ -114,7 +114,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                   maxLength={4}
                   required
                 />
-                <p className="text-sm text-muted-foreground">Demo OTP: 1234</p>
               </div>
               <div className="flex gap-2">
                 <Button type="button" variant="outline" onClick={() => setStep("mobile")} className="flex-1">

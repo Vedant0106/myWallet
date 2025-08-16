@@ -19,18 +19,14 @@ export const useWallet = () => {
   }, [])
 
   const updateBalance = (newBalance: WalletBalance) => {
-    console.log("  useWallet - Updating balance", { oldBalance: balance, newBalance })
     setBalance(newBalance)
     storage.setBalance(newBalance)
-    console.log("  useWallet - Balance updated in state and storage")
   }
 
   const addTransaction = (transaction: Transaction) => {
-    console.log("  useWallet - Adding transaction", transaction)
     storage.addTransaction(transaction)
     setTransactions((prev) => {
       const newTransactions = [transaction, ...prev]
-      console.log("  useWallet - Updated transactions list", newTransactions.length)
       return newTransactions
     })
   }

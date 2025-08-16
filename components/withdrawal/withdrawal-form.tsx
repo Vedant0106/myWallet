@@ -38,10 +38,8 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
   const { toast } = useToast()
 
   const validateBankDetails = () => {
-    console.log("  Validating bank details:", bankDetails)
 
     if (!bankDetails.bankName.trim()) {
-      console.log("  Bank name validation failed")
       toast({
         title: "Bank Name Required",
         description: "Please enter your bank name",
@@ -51,7 +49,6 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
     }
 
     if (!bankDetails.accountNumber.trim()) {
-      console.log("  Account number validation failed")
       toast({
         title: "Account Number Required",
         description: "Please enter your account number",
@@ -61,7 +58,6 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
     }
 
     if (!bankDetails.ifscCode.trim()) {
-      console.log("  IFSC code validation failed")
       toast({
         title: "IFSC Code Required",
         description: "Please enter your IFSC code",
@@ -69,20 +65,13 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
       })
       return false
     }
-
-    console.log("  Bank details validation passed (dummy validation)")
     return true
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("  Withdrawal form submitted!")
     e.preventDefault()
-
     const numAmount = Number.parseFloat(amount)
-    console.log("  Parsed amount:", numAmount, "Currency:", currency)
-
     if (isNaN(numAmount) || numAmount <= 0) {
-      console.log("  Amount validation failed")
       toast({
         title: "Invalid Amount",
         description: "Please enter a valid amount greater than 0",
@@ -90,10 +79,7 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
       })
       return
     }
-
-    console.log("  Current balance:", balance[currency], "Requested amount:", numAmount)
     if (balance[currency] < numAmount) {
-      console.log("  Insufficient balance check failed")
       toast({
         title: "Insufficient Balance",
         description: `You don't have enough ${currency} balance`,
@@ -103,17 +89,13 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
     }
 
     if (!validateBankDetails()) {
-      console.log("  Bank details validation failed, stopping withdrawal")
       return
     }
-
-    console.log("  All validations passed, processing withdrawal...")
     setIsLoading(true)
 
     // Update balance immediately
     const newBalance = { ...balance }
     newBalance[currency] -= numAmount
-    console.log("  New balance after withdrawal:", newBalance)
 
     // Create transaction
     const transaction: Transaction = {
@@ -126,19 +108,12 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
       description: `Withdrawal to ${bankDetails.bankName}`,
       bankDetails: { ...bankDetails },
     }
-    console.log("  Created transaction:", transaction)
-
-    // Call the callback immediately
-    console.log("  Calling onWithdraw callback...")
     onWithdraw(transaction, newBalance)
 
     toast({
       title: "Withdrawal Successful",
       description: `${numAmount} ${currency} has been withdrawn from your account.`,
     })
-
-    // Reset form
-    console.log("  Resetting form...")
     setAmount("")
     setBankDetails({
       bankName: "",
@@ -146,7 +121,6 @@ export const WithdrawalForm = ({ balance, onWithdraw }: WithdrawalFormProps) => 
       ifscCode: "",
     })
     setIsLoading(false)
-    console.log("  Withdrawal process completed!")
   }
 
   const handleButtonClick = () => {

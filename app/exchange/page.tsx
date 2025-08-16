@@ -15,9 +15,7 @@ export default function ExchangePage() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log("  Exchange page - Auth state:", { isAuthenticated, isLoading })
     if (!isLoading && !isAuthenticated) {
-      console.log("  Redirecting to login from exchange page")
       router.push("/")
     }
   }, [isAuthenticated, isLoading, router])
@@ -52,7 +50,6 @@ export default function ExchangePage() {
             <Button
               variant="ghost"
               onClick={() => {
-                console.log("Navigating back to homepage from exchange")
                 router.push("/")
               }}
             >

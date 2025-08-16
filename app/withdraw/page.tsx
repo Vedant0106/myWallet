@@ -52,7 +52,6 @@ export default function WithdrawPage() {
             <Button
               variant="ghost"
               onClick={() => {
-                console.log("Navigating back to homepage from withdraw")
                 router.push("/")
               }}
             >

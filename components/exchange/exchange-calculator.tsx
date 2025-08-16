@@ -40,7 +40,7 @@ export const ExchangeCalculator = ({ fromCurrency, toCurrency, amount }: Exchang
           </div>
         </div>
 
-        <div className="text-xs text-muted-foreground text-center">Exchange rates are fixed for demo purposes</div>
+        <div className="text-xs text-muted-foreground text-center">Exchange rates are fixed</div>
       </CardContent>
     </Card>
   )
