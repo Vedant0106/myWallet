@@ -51,7 +51,13 @@ export const TransactionFilters = ({ onFilterChange, totalTransactions, filtered
     onFilterChange(emptyFilters)
   }
 
-  const hasActiveFilters = Object.values(filters).some((value) => value !== "")
+  const hasActiveFilters =
+    filters.dateFrom !== "" ||
+    filters.dateTo !== "" ||
+    filters.type !== "all" ||
+    filters.status !== "all" ||
+    filters.search !== ""
+
 
   return (
     <Card>

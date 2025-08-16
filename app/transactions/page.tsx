@@ -18,8 +18,8 @@ export default function TransactionsPage() {
   const [filters, setFilters] = useState<FilterState>({
     dateFrom: "",
     dateTo: "",
-    type: "",
-    status: "",
+    type: "all",
+    status: "all",
     search: "",
   })
 
@@ -46,12 +46,12 @@ export default function TransactionsPage() {
       }
 
       // Type filter
-      if (filters.type && transaction.type !== filters.type) {
+      if (filters.type && filters.type !== "all" && transaction.type !== filters.type) {
         return false
       }
 
       // Status filter
-      if (filters.status && transaction.status !== filters.status) {
+      if (filters.status && filters.status !== "all" && transaction.status !== filters.status) {
         return false
       }
 
